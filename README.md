@@ -3,7 +3,10 @@
 A little Redis experiment in Go.
 
 Basically publish text to a Redis topic, and the subscribers speak the phrase
-via the `say` command.
+via the `/usr/bin/say` command.
+
+For amusement create mutliple subscribers on multiple machines, with different
+voices.
 
 ## Build
 
@@ -25,8 +28,11 @@ The `voice` parameter is ignored for the publisher.
 
 ### Subscriber
 
-The `voice` parameter is optional. If not supplied `say` command will be
+The `voice` parameter is optional. If not supplied the `say` command will be
 executed without a voice specified so the system default will be used.
+
+If a `voice` is specified it is assumed to exist on your system. Specifiying
+a voice that does not exist will result in silence when speaking a message.
 
     $ ./bin/chitchatsub --help
     Usage of ./bin/chitchatsub:
@@ -38,18 +44,17 @@ executed without a voice specified so the system default will be used.
 
 ### Examples
 
-Subecribe to messages, using voice `alex`
+Subscribe to messages, using voice `alex`
 
     $ ./bin/chitchatsub -v alex --host 192.168.x.y
 
-For amusement create mutliple subscribers on multiple machines, with different
-voices.
+Publish a message
 
     $ ./bin/chitchatsub -v alex --host 192.168.x.y
 
 Publish a message.
 
-    $ ./bin/chitchatpub --host 192.168.x.y hello there
+    $ ./bin/chitchatpub --host 192.168.x.y This is the sound of noise
 
 Listen to the voices, but take care when following their advice :)
 
